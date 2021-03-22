@@ -25,8 +25,8 @@ export const useStylesSignIn = makeStyles((theme) => ({
 		left: '50%',
 		top: '53%',
 		transform: 'translate(-50%, -50%)',
-		width: '350%',
-		height: '350%',
+		width: '260%',
+		height: '260%',
 	},
 	blueSideListInfo: {
 		position: 'relative',
@@ -74,12 +74,12 @@ export const useStylesSignIn = makeStyles((theme) => ({
 	registerField: {
 		marginBottom: theme.spacing(5),
 	},
-loginFormControl: {
-		marginBottom: theme.spacing(2)
-	}
+	loginFormControl: {
+		marginBottom: theme.spacing(2),
+	},
 }));
 
-function SignIn() {
+export const SignIn: React.FC = (): React.ReactElement => {
 	const [visableModal, setVisableModal] = React.useState<'signIn' | 'signUp'>();
 	const classes = useStylesSignIn();
 
@@ -219,6 +219,4 @@ function SignIn() {
 			</section>
 		</div>
 	);
-}
-
-export default SignIn;
+};
