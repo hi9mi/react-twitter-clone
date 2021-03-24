@@ -1,6 +1,6 @@
-import { Theme } from '@material-ui/core/styles';
-import { grey } from '@material-ui/core/colors';
 import { makeStyles } from '@material-ui/core';
+import { grey } from '@material-ui/core/colors';
+import { Theme } from '@material-ui/core/styles';
 
 export const useHomeStyles = makeStyles((theme: Theme) => ({
 	wrapper: {
@@ -68,6 +68,8 @@ export const useHomeStyles = makeStyles((theme: Theme) => ({
 		textAlign: 'center',
 	},
 	tweetsHeader: {
+		display: 'flex',
+		alignItems: 'center',
 		borderTop: 'none',
 		borderRight: 'none',
 		borderLeft: 'none',
@@ -76,8 +78,12 @@ export const useHomeStyles = makeStyles((theme: Theme) => ({
 			fontWeight: 800,
 		},
 	},
+	tweetsHeaderBackButton: {
+		marginRight: 30,
+	},
 	tweet: {
 		display: 'flex',
+		alignItems: 'flex-start',
 		cursor: 'pointer',
 		transition: 'all .1s linear',
 		paddingTop: 15,
@@ -85,6 +91,10 @@ export const useHomeStyles = makeStyles((theme: Theme) => ({
 		'&:hover': {
 			backgroundColor: 'rgb(245, 248, 250)',
 		},
+	},
+	tweetWrapper: {
+		color: 'inherit',
+		textDecoration: 'none',
 	},
 	TweetAvatar: {
 		width: theme.spacing(6.5),
@@ -138,6 +148,10 @@ export const useHomeStyles = makeStyles((theme: Theme) => ({
 		},
 		'&:hover': {
 			backgroundColor: '#edf3f6',
+		},
+		'& a': {
+			color: 'inherit',
+			textDecoration: 'none',
 		},
 	},
 	addForm: {

@@ -1,19 +1,20 @@
-import { AddTweetForm } from './AddTweetForm';
-import BookmarkIcon from '@material-ui/icons/BookmarkBorder';
 import Button from '@material-ui/core/Button';
-import CreateIcon from '@material-ui/icons/Create';
 import Hidden from '@material-ui/core/Hidden';
 import IconButton from '@material-ui/core/IconButton';
+import Typography from '@material-ui/core/Typography';
+import BookmarkIcon from '@material-ui/icons/BookmarkBorder';
+import CreateIcon from '@material-ui/icons/Create';
 import ListIcon from '@material-ui/icons/ListAlt';
 import MessageIcon from '@material-ui/icons/MailOutline';
-import { ModalBlock } from './ModalBlock';
 import NotificationsIcon from '@material-ui/icons/NotificationsNone';
-import React from 'react';
+import UserIcon from '@material-ui/icons/PermIdentity';
 import SearchIcon from '@material-ui/icons/Search';
 import TwitterIcon from '@material-ui/icons/Twitter';
-import Typography from '@material-ui/core/Typography';
-import UserIcon from '@material-ui/icons/PermIdentity';
 import { useHomeStyles } from 'pages/Home/theme';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { AddTweetForm } from './AddTweetForm';
+import { ModalBlock } from './ModalBlock';
 
 interface SideMenuProps {
 	classes: ReturnType<typeof useHomeStyles>;
@@ -33,9 +34,11 @@ export const SideMenu: React.FC<SideMenuProps> = ({ classes }: SideMenuProps): R
 	return (
 		<ul className={classes.sideMenuList}>
 			<li className={classes.sideMenuListItem}>
-				<IconButton className={classes.logo} aria-label='' color='primary'>
-					<TwitterIcon className={classes.logoIcon} />
-				</IconButton>
+				<Link to='/home'>
+					<IconButton className={classes.logo} aria-label='' color='primary'>
+						<TwitterIcon className={classes.logoIcon} />
+					</IconButton>
+				</Link>
 			</li>
 			<li className={classes.sideMenuListItem}>
 				<div>

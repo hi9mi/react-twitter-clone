@@ -9,8 +9,6 @@ import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 import classNames from 'classnames';
 import { useHomeStyles } from 'pages/Home/theme';
 
-// TODO: 42 minute
-
 interface AddTweetFormProps {
 	classes: ReturnType<typeof useHomeStyles>;
 	rowsMax?: number;
