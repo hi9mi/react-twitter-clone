@@ -27,7 +27,7 @@ export const Tweet: React.FC<TweetProps> = ({ _id, text, classes, user }: TweetP
 		<Link className={classes.tweetWrapper} to={`/home/tweet/${_id}`}>
 			<Paper className={classNames(classes.tweet, classes.tweetsHeader)} variant='outlined'>
 				<Avatar className={classes.TweetAvatar} alt={`Аватарка пользователя ${user.fullname}`} src={user.avatarUrl} />
-				<div>
+				<div style={{ width: '100%' }}>
 					<Typography>
 						<b>{user.fullname}</b>&nbsp;
 						<span className={classes.tweetUserName}>@{user.username}</span>&nbsp;

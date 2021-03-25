@@ -1,17 +1,18 @@
+import Avatar from '@material-ui/core/Avatar';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import { Tweet } from 'components/Tweet';
+import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import { fetchTweetData, setTweetData } from 'redux/ducks/tweet/actionCreatores';
-import { selectIsTweetLoaded, selectIsTweetLoading, selectTweetData } from 'redux/ducks/tweet/selector';
+import { selectIsTweetLoading, selectTweetData } from 'redux/ducks/tweet/selector';
 import { useHomeStyles } from '../theme';
 
 export const FullTweet: React.FC = (): React.ReactElement | null => {
 	const classes = useHomeStyles();
 	const dispatch = useDispatch();
 	const tweetData = useSelector(selectTweetData);
-	const isLoaded = useSelector(selectIsTweetLoaded);
 	const isLoading = useSelector(selectIsTweetLoading);
 	const params: { id?: string } = useParams();
 	const id = params.id;
@@ -22,8 +23,8 @@ export const FullTweet: React.FC = (): React.ReactElement | null => {
 		}
 
 		return () => {
-			dispatch (setTweetData(undefined))
-		}
+			dispatch(setTweetData(undefined));
+		};
 	}, [dispatch, id]);
 
 	if (isLoading) {
@@ -35,7 +36,28 @@ export const FullTweet: React.FC = (): React.ReactElement | null => {
 	}
 
 	if (tweetData) {
-		return <Tweet classes={classes} {...tweetData} />;
+		return (
+			<Paper className={classes.fullTweet}>
+				<div className={classes.tweetsHeaderUser}>
+					<Avatar
+						className={classes.TweetAvatar}
+						alt={`Аватарка пользователя ${tweetData.user.fullname}`}
+						src={tweetData.user.avatarUrl}
+					/>
+					<Typography>
+						<b>{tweetData.user.fullname}</b>&nbsp;
+						<div>
+							<span className={classes.tweetUserName}>@{tweetData.user.username}</span>&nbsp;
+							<span className={classes.tweetUserName}>·</span>&nbsp;
+							<span className={classes.tweetUserName}>1 ч</span>
+						</div>
+					</Typography>
+				</div>
+				<Typography className={classes.fullTweetText} gutterBottom>
+					{tweetData.text}
+				</Typography>
+			</Paper>
+		);
 	}
 
 	return null;

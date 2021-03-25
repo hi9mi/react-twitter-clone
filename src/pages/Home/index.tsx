@@ -41,11 +41,11 @@ export const Home = (): React.ReactElement => {
 
 	return (
 		<Container className={classes.wrapper} maxWidth='lg'>
-			<Grid style={{ height: '100%' }} container spacing={3}>
-				<Grid sm={1} md={3} item>
+			<Grid container spacing={3} style={{ height: '100%', paddingBottom: 0 }}>
+				<Grid style={{ paddingBottom: 0 }} sm={1} md={3} item>
 					<SideMenu classes={classes} />
 				</Grid>
-				<Grid sm={8} md={6} item>
+				<Grid style={{ paddingBottom: 0 }} sm={8} md={6} item>
 					<Paper className={classes.tweetsWrapper} variant='outlined'>
 						<Paper className={classes.tweetsHeader} variant='outlined'>
 							<Route path='/home/:any'>
@@ -78,7 +78,7 @@ export const Home = (): React.ReactElement => {
 						<Route path='/home/tweet/:id' component={FullTweet} exact />
 					</Paper>
 				</Grid>
-				<Grid sm={3} md={3} item xs={3}>
+				<Grid style={{ paddingBottom: 0 }} sm={3} md={3} item>
 					<div className={classes.rightSide}>
 						<SearchTextField
 							variant='outlined'
