@@ -34,6 +34,10 @@ const theme = createMuiTheme({
 		text: {
 			primary: '#14171a',
 		},
+		action: {
+			disabledBackground: '#8ED0F9',
+			disabled: 'rgb(255, 255, 255)',
+		},
 	},
 	shadows: [],
 	overrides: {

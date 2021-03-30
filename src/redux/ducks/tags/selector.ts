@@ -1,7 +1,8 @@
-import { LoadingState, TagsState } from './contracts/state';
-
-import { RootState } from 'redux/store';
 import { createSelector } from 'reselect';
+
+import { LoadingState, TagsState } from './contracts/state';
+import { RootState } from 'redux/store';
+
 
 export const selectTags = (state: RootState): TagsState => state.tags;
 

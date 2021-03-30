@@ -1,3 +1,5 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import Hidden from '@material-ui/core/Hidden';
 import IconButton from '@material-ui/core/IconButton';
@@ -10,9 +12,9 @@ import NotificationsIcon from '@material-ui/icons/NotificationsNone';
 import UserIcon from '@material-ui/icons/PermIdentity';
 import SearchIcon from '@material-ui/icons/Search';
 import TwitterIcon from '@material-ui/icons/Twitter';
+
+
 import { useHomeStyles } from 'pages/Home/theme';
-import React from 'react';
-import { Link } from 'react-router-dom';
 import { AddTweetForm } from './AddTweetForm';
 import { ModalBlock } from './ModalBlock';
 

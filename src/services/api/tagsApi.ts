@@ -1,8 +1,9 @@
+import { axios } from 'core/axios';
 import { TagsState } from 'redux/ducks/tags/contracts/state';
-import axios from 'axios';
 
 export const TagsApi = {
-	fetchTags(): Promise<TagsState['items']> {
-		return axios.get('tags').then(({ data }) => data);
+	async fetchTags(): Promise<TagsState['items']> {
+		const { data } = await axios.get('tags');
+		return data;
 	},
 };

@@ -1,13 +1,15 @@
+import React from 'react';
+import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+
 import Divider from '@material-ui/core/Divider';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
+
 import { useHomeStyles } from 'pages/Home/theme';
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { selectIsTagsLoaded, selectTagsItems } from 'redux/ducks/tags/selector';
 
 interface TagsProps {

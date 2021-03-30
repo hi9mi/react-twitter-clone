@@ -3,7 +3,7 @@
     {
       "id": 1,
       "_id": "6059f102e94bec479d239bd0",
-      "text": "Laboris ut occaecat sint non ex minim cillum. Enim adipisicing aliquip aliqua amet nisi amet dolore sunt exercitation labore minim labore nisi mollit. Excepteur mollit anim nulla mollit adipisicing exercitation reprehenderit incididunt non nulla. Duis incididunt sunt consequat excepteur. Consequat minim non irure minim voluptate fugiat adipisicing laborum qui.",
+      "text": "this is the first tweet in my life. thanks you for attention 😳",
       "user": {
         "fullname": "Deanna Marks",
         "username": "solis",
@@ -11,44 +11,14 @@
       }
     },
     {
-      "_id": "xwcqvy86cle",
-      "text": "tweet",
+      "_id": "7rcisudj2w5",
+      "text": "its work ?",
       "user": {
         "fullname": "Test User",
         "username": "test",
         "avatarUrl": "https://source.unsplash.com/random/100x100?5"
       },
       "id": 2
-    },
-    {
-      "_id": "6x5ntx9vs15",
-      "text": "sss",
-      "user": {
-        "fullname": "Test User",
-        "username": "test",
-        "avatarUrl": "https://source.unsplash.com/random/100x100?5"
-      },
-      "id": 3
-    },
-    {
-      "_id": "22mcvu4kipz",
-      "text": "dasdasda",
-      "user": {
-        "fullname": "Test User",
-        "username": "test",
-        "avatarUrl": "https://source.unsplash.com/random/100x100?5"
-      },
-      "id": 4
-    },
-    {
-      "_id": "fy1kn4zb63h",
-      "text": "test",
-      "user": {
-        "fullname": "Test User",
-        "username": "test",
-        "avatarUrl": "https://source.unsplash.com/random/100x100?5"
-      },
-      "id": 5
     }
   ],
   "tags": [

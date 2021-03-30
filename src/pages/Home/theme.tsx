@@ -107,6 +107,11 @@ export const useHomeStyles = makeStyles((theme: Theme) => ({
 		height: theme.spacing(6.5),
 		marginRight: 15,
 	},
+	tweetHeader: {
+		display: 'flex',
+		justifyContent: 'space-between',
+		cursor: 'pointer',
+	},
 	tweetFooter: {
 		display: 'flex',
 		justifyContent: 'space-between',
@@ -124,7 +129,29 @@ export const useHomeStyles = makeStyles((theme: Theme) => ({
 		fontSize: 24,
 		marginTop: 20,
 		lineHeight: 1.3125,
-		wordBreak: 'break-word'
+		wordBreak: 'break-word',
+	},
+	fullTweetFooterCounters: {
+		display: 'flex',
+		alignItems: 'center',
+		height: 48,
+		'& div': {
+			cursor: 'pointer',
+			marginRight: 20,
+			transition: 'all 0.13s linear',
+			'& b': {
+				marginRight: 5,
+			},
+			'&:hover': {
+				textDecoration: 'underline',
+			},
+		},
+	},
+	fullTweetFooter: {
+		display: 'flex',
+		justifyContent: 'space-around',
+		position: 'relative',
+		height: 48,
 	},
 	rightSide: {
 		paddingTop: 20,

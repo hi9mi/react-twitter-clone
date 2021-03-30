@@ -1,3 +1,6 @@
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Route } from 'react-router-dom';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -13,25 +16,23 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import SearchIcon from '@material-ui/icons/Search';
+
 import { AddTweetForm } from 'components/AddTweetForm';
 import { BackButton } from 'components/BackButton';
 import { SearchTextField } from 'components/SearchTextField';
 import { SideMenu } from 'components/SideMenu';
 import { Tags } from 'components/Tags';
 import { Tweet } from 'components/Tweet';
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Route } from 'react-router-dom';
 import { fetchTags } from 'redux/ducks/tags/actionCreatores';
 import { fetchTweets } from 'redux/ducks/tweets/actionCreatores';
-import { selectIsTweetsLoading, selectTweetsItems } from 'redux/ducks/tweets/selector';
+import { selectIsTweetsLoading, selectTweetsStateItems } from 'redux/ducks/tweets/selector';
 import { FullTweet } from './components/FullTweet';
 import { useHomeStyles } from './theme';
 
 export const Home = (): React.ReactElement => {
 	const classes = useHomeStyles();
 	const dispatch = useDispatch();
-	const tweets = useSelector(selectTweetsItems);
+	const tweets = useSelector(selectTweetsStateItems);
 	const isLoading = useSelector(selectIsTweetsLoading);
 
 	React.useEffect(() => {

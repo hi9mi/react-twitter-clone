@@ -1,15 +1,16 @@
+import React from 'react';
 import Button from '@material-ui/core/Button';
 import FormControl from '@material-ui/core/FormControl';
 import FormGroup from '@material-ui/core/FormGroup';
 import MessageIcon from '@material-ui/icons/ModeCommentOutlined';
-import { ModalBlock } from 'components/ModalBlock';
 import PeopleIcon from '@material-ui/icons/PeopleOutline';
-import React from 'react';
 import SearchIcon from '@material-ui/icons/Search';
 import TextField from '@material-ui/core/TextField';
 import TwitterIcon from '@material-ui/icons/Twitter';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core';
+
+import { ModalBlock } from 'components/ModalBlock';
 
 export const useStylesSignIn = makeStyles((theme) => ({
 	wrapper: {

@@ -1,10 +1,11 @@
-import { call, put, takeEvery } from 'redux-saga/effects';
+import { call, put, StrictEffect, takeEvery } from 'redux-saga/effects';
+
 import { TweetsApi } from 'services/api/tweetsApi';
 import { addTweet, setAddFormState, setTweets, setTweetsLoadingState } from './actionCreatores';
 import { FetchAddTweetActionInterface, TweetsActionsType } from './contracts/actionTypes';
 import { AddFormState, LoadingState, Tweet } from './contracts/state';
 
-export function* fetchTweetsRequest(): any {
+export function* fetchTweetsRequest(): Generator<StrictEffect, void, Tweet[]>  {
 	try {
 		const items = yield call(TweetsApi.fetchTweets);
 		yield put(setTweets(items));
@@ -13,18 +14,9 @@ export function* fetchTweetsRequest(): any {
 	}
 }
 
-export function* fetchAddTweetRequest({ payload }: FetchAddTweetActionInterface): any {
+export function* fetchAddTweetRequest({ payload: text }: FetchAddTweetActionInterface): Generator<StrictEffect, void, Tweet> {
 	try {
-		const data: Tweet = {
-			_id: Math.random().toString(36).substr(2),
-			text: payload,
-			user: {
-				fullname: 'Test User',
-				username: 'test',
-				avatarUrl: 'https://source.unsplash.com/random/100x100?5',
-			},
-		};
-		const item = yield call(TweetsApi.addTweet, data);
+		const item = yield call(TweetsApi.addTweet, text);
 		yield put(addTweet(item));
 	} catch (e) {
 		yield put(setAddFormState(AddFormState.ERROR));

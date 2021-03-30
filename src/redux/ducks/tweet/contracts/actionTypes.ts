@@ -1,4 +1,5 @@
 import { Action } from 'redux';
+
 import { LoadingState, TweetState } from './state';
 
 export enum TweetActionsType {

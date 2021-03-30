@@ -1,6 +1,8 @@
+import produce, { Draft } from 'immer';
+
 import { LoadingState, TagsState } from './contracts/state';
 import { TagsActions, TagsActionsType } from './actionCreatores';
-import produce, { Draft } from 'immer';
+
 
 const initialTagsState: TagsState = {
 	items: [],

@@ -1,3 +1,6 @@
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import classNames from 'classnames';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -6,10 +9,8 @@ import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 import EmojiIcon from '@material-ui/icons/EmojiEmotionsOutlined';
 import ImageOutlinedIcon from '@material-ui/icons/ImageOutlined';
 import Alert from '@material-ui/lab/Alert';
-import classNames from 'classnames';
+
 import { useHomeStyles } from 'pages/Home/theme';
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { fetchAddTweet } from 'redux/ducks/tweets/actionCreatores';
 import { AddFormState } from 'redux/ducks/tweets/contracts/state';
 import { selectAddFormState } from 'redux/ducks/tweets/selector';
@@ -102,7 +103,7 @@ export const AddTweetForm: React.FC<AddTweetFormProps> = ({
 						{addFormState === AddFormState.LOADING ? (
 							<CircularProgress size={16} color='inherit' style={{ margin: '10px 30px' }} />
 						) : (
-							'Твиттнуть'
+							'Твитнуть'
 						)}
 					</Button>
 				</div>
