@@ -1,13 +1,7 @@
-import { Tweet } from "redux/ducks/tweets/contracts/state";
-
-export enum LoadingState {
-	LOADED = 'LOADED',
-	LOADING = 'LOADING',
-	ERROR = 'ERROR',
-	NEVER = 'NEVER',
-}
+import { Tweet } from 'redux/ducks/tweets/contracts/state';
+import { LoadingStatus } from 'redux/types';
 
 export interface TweetState {
 	data?: Tweet;
-	loadingState: LoadingState;
+	LoadingStatus: LoadingStatus;
 }

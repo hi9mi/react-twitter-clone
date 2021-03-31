@@ -11,6 +11,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core';
 
 import { ModalBlock } from 'components/ModalBlock';
+import { LoginModal } from './components/LoginModal';
 
 export const useStylesSignIn = makeStyles((theme) => ({
 	wrapper: {
@@ -147,80 +148,7 @@ export const SignIn: React.FC = (): React.ReactElement => {
 					<Button onClick={handleClickOpenSignIn} variant='outlined' color='primary' fullWidth>
 						Войти
 					</Button>
-					<ModalBlock
-						visable={visableModal === 'signIn'}
-						onClose={handleCloseModal}
-						classes={classes}
-						title='Войти в аккаунт'>
-						<FormControl className={classes.loginFormControl} component='fieldset' fullWidth>
-							<FormGroup aria-label='position' row>
-								<TextField
-									autoFocus
-									id='email'
-									label='E-Mail'
-									InputLabelProps={{ shrink: true }}
-									variant='filled'
-									type='email'
-									className={classes.loginSideField}
-									fullWidth
-								/>
-								<TextField
-									id='password'
-									label='Пароль'
-									InputLabelProps={{ shrink: true }}
-									variant='filled'
-									type='password'
-									className={classes.loginSideField}
-									fullWidth
-								/>
-								<Button onClick={handleCloseModal} variant='contained' color='primary' fullWidth>
-									Войти
-								</Button>
-							</FormGroup>
-						</FormControl>
-					</ModalBlock>
-					<ModalBlock
-						visable={visableModal === 'signUp'}
-						onClose={handleCloseModal}
-						classes={classes}
-						title='Создайте учетную запись'>
-						<FormControl className={classes.loginFormControl} component='fieldset' fullWidth>
-							<FormGroup aria-label='position' row>
-								<TextField
-									autoFocus
-									id='name'
-									label='Имя'
-									InputLabelProps={{ shrink: true }}
-									variant='filled'
-									type='name'
-									className={classes.registerField}
-									fullWidth
-								/>
-								<TextField
-									autoFocus
-									id='email'
-									label='E-Mail'
-									InputLabelProps={{ shrink: true }}
-									variant='filled'
-									type='email'
-									className={classes.registerField}
-									fullWidth
-								/>
-								<TextField
-									id='password'
-									label='Пароль'
-									InputLabelProps={{ shrink: true }}
-									variant='filled'
-									type='password'
-									className={classes.registerField}
-									fullWidth
-								/>
-								<Button variant='contained' color='primary' fullWidth>
-									Далее
-								</Button>
-							</FormGroup>
-						</FormControl>
-					</ModalBlock>
+					<LoginModal open={visableModal === 'signIn'} onClose={handleCloseModal} />
 				</div>
 			</section>
 		</div>
