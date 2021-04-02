@@ -59,7 +59,7 @@ export const Tweet: React.FC<TweetProps> = ({
 			<Paper className={classNames(classes.tweet, classes.tweetsHeader)} variant='outlined'>
 				<Avatar className={classes.TweetAvatar} alt={`Аватарка пользователя ${user.fullname}`} src={user.avatarUrl} />
 				<div style={{ width: '100%' }}>
-					<Typography className={classes.tweetHeader}>
+					<div className={classes.tweetHeader}>
 						<div>
 							<b>{user.fullname}</b>&nbsp;
 							<span className={classes.tweetUserName}>@{user.username}</span>&nbsp;
@@ -80,7 +80,7 @@ export const Tweet: React.FC<TweetProps> = ({
 								<MenuItem onClick={handleClose}>Удалить твит</MenuItem>
 							</Menu>
 						</div>
-					</Typography>
+					</div>
 					<Typography variant='body1' gutterBottom>
 						{text}
 					</Typography>

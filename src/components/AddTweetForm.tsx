@@ -14,6 +14,7 @@ import { useHomeStyles } from 'pages/Home/theme';
 import { fetchAddTweet } from 'redux/ducks/tweets/actionCreatores';
 import { AddFormState } from 'redux/ducks/tweets/contracts/state';
 import { selectAddFormState } from 'redux/ducks/tweets/selector';
+import { selectUserData } from 'redux/ducks/user/selector';
 
 interface AddTweetFormProps {
 	classes: ReturnType<typeof useHomeStyles>;
@@ -29,6 +30,7 @@ export const AddTweetForm: React.FC<AddTweetFormProps> = ({
 	rowsMax,
 }: AddTweetFormProps): React.ReactElement => {
 	const dispatch = useDispatch();
+	const user = useSelector(selectUserData);
 	const [text, setText] = React.useState<string>('');
 
 	const addFormState = useSelector(selectAddFormState);
@@ -49,11 +51,7 @@ export const AddTweetForm: React.FC<AddTweetFormProps> = ({
 	return (
 		<div>
 			<div className={classes.addFormBody}>
-				<Avatar
-					className={classes.TweetAvatar}
-					alt={`Аватарка пользователя UserAvatar`}
-					src='https://images.unsplash.com/photo-1533227268428-f9ed0900fb3b?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1158&q=80'
-				/>
+				<Avatar className={classes.TweetAvatar} alt={`Аватарка пользователя ${user?.username}`} src={`${undefined}`} />
 				<TextareaAutosize
 					onChange={handleChangeTextarea}
 					className={classes.addFormTextarea}

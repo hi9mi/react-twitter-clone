@@ -12,6 +12,7 @@ import { makeStyles } from '@material-ui/core';
 
 import { ModalBlock } from 'components/ModalBlock';
 import { LoginModal } from './components/LoginModal';
+import { RegisterModal } from './components/RegisterModal';
 
 export const useStylesSignIn = makeStyles((theme) => ({
 	wrapper: {
@@ -149,6 +150,7 @@ export const SignIn: React.FC = (): React.ReactElement => {
 						Войти
 					</Button>
 					<LoginModal open={visableModal === 'signIn'} onClose={handleCloseModal} />
+					<RegisterModal open={visableModal === 'signUp'} onClose={handleCloseModal} />
 				</div>
 			</section>
 		</div>

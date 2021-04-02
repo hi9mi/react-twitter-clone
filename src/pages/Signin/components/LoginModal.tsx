@@ -12,8 +12,7 @@ import { Color } from '@material-ui/lab/Alert';
 import { ModalBlock } from 'components/ModalBlock';
 import { useStylesSignIn } from '..';
 import { Notification } from 'components/Notification';
-
-import { fetchSignIn } from 'redux/ducks/user/actionCreatores';
+import { fetchSignUp } from 'redux/ducks/user/actionCreatores';
 import { selectUserStatus } from 'redux/ducks/user/selector';
 import { LoadingStatus } from 'redux/types';
 
@@ -42,13 +41,13 @@ export const LoginModal: React.FC<LoginModalProps> = ({ open, onClose }: LoginMo
 		resolver: yupResolver(LoginFormSchema),
 	});
 	const onSubmit = async (data: LoginFormProps) => {
-		dispatch(fetchSignIn(data));
+		dispatch(fetchSignUp(data));
 	};
 
 	React.useEffect(() => {
 		if (loadingStatus === LoadingStatus.SUCCESS) {
 			openNotificationRef.current('Авторизация прошла успешна', 'success');
-			onClose()
+			onClose();
 		} else if (loadingStatus === LoadingStatus.ERROR) {
 			openNotificationRef.current('Неверный логин или пароль', 'error');
 		}
@@ -72,7 +71,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({ open, onClose }: LoginMo
 												label='E-Mail'
 												InputLabelProps={{ shrink: true }}
 												variant='filled'
-												type='email'
+												type='text'
 												className={classes.loginSideField}
 												error={!!fieldsErrors.email}
 												helperText={fieldsErrors.email ? fieldsErrors.email.message : null}
@@ -85,7 +84,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({ open, onClose }: LoginMo
 											required: true,
 											pattern: {
 												value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-												message: 'invalid email address',
+												message: 'Неверный пароль или E-mail',
 											},
 										}}
 									/>
@@ -107,10 +106,15 @@ export const LoginModal: React.FC<LoginModalProps> = ({ open, onClose }: LoginMo
 										control={control}
 										defaultValue=''
 										rules={{
-											required: 'Required',
+											required: true,
 										}}
 									/>
-									<Button type='submit' variant='contained' color='primary' fullWidth>
+									<Button
+										disabled={loadingStatus === LoadingStatus.LOADING}
+										type='submit'
+										variant='contained'
+										color='primary'
+										fullWidth>
 										Войти
 									</Button>
 								</FormGroup>

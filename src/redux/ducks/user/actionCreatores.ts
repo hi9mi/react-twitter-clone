@@ -1,6 +1,8 @@
 import { LoginFormProps } from 'pages/Signin/components/LoginModal';
+import { RegisterFormProps } from 'pages/Signin/components/RegisterModal';
 import {
 	FetchSignInActionInterface,
+	FetchSignUpActionInterface,
 	SetUserDataActionInterface,
 	SetUserLoadingStatusActionInterface,
 	UserActionsType,
@@ -12,7 +14,12 @@ export const setUserData = (payload: UserState['data']): SetUserDataActionInterf
 	payload,
 });
 
-export const fetchSignIn = (payload: LoginFormProps): FetchSignInActionInterface => ({
+export const fetchSignIn = (payload: RegisterFormProps): FetchSignUpActionInterface => ({
+	type: UserActionsType.FETCH_SIGN_UP,
+	payload,
+});
+
+export const fetchSignUp = (payload: LoginFormProps): FetchSignInActionInterface => ({
 	type: UserActionsType.FETCH_SIGN_IN,
 	payload,
 });

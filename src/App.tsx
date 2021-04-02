@@ -1,29 +1,38 @@
 import React from 'react';
 import { Route, Switch, useHistory } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { Home } from 'pages/Home';
 import { SignIn } from 'pages/Signin';
 import { AuthApi } from 'services/api/authApi';
 import { setUserData } from 'redux/ducks/user/actionCreatores';
+import { selectIsAuth } from 'redux/ducks/user/selector';
 
 function App() {
 	const dispatch = useDispatch();
-	const history = useHistory()
+	const history = useHistory();
+	const isAuth = useSelector(selectIsAuth);
 
 	const checkAuth = React.useCallback(async () => {
 		try {
 			const { data } = await AuthApi.getMe();
 			dispatch(setUserData(data));
-			history.replace('/home')
 		} catch (error) {
 			console.log(error);
 		}
-	}, [dispatch, history]);
+	}, [dispatch]);
 
 	React.useEffect(() => {
 		checkAuth();
 	}, [checkAuth]);
+
+	React.useEffect(() => {
+		if (isAuth ? history.location.pathname === '/signin' || '/' : null) {
+			history.push('/home');
+		} else {
+			history.push('/signin')
+		}
+	}, [isAuth]);
 
 	return (
 		<div className='App'>
