@@ -57,7 +57,7 @@ export const Tweet: React.FC<TweetProps> = ({
 	return (
 		<a href={`/home/tweet/${_id}`} className={classes.tweetWrapper} onClick={handleClickTweet}>
 			<Paper className={classNames(classes.tweet, classes.tweetsHeader)} variant='outlined'>
-				<Avatar className={classes.TweetAvatar} alt={`Аватарка пользователя ${user.fullname}`} src={user.avatarUrl} />
+				<Avatar className={classes.TweetAvatar} alt={`Аватарка пользователя ${user.fullname}`} src={`${undefined}`} />
 				<div style={{ width: '100%' }}>
 					<div className={classes.tweetHeader}>
 						<div>

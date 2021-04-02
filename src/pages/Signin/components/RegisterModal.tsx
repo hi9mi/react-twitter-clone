@@ -70,142 +70,135 @@ export const RegisterModal: React.FC<RegisterModalProps> = ({
 	}, [loadingStatus, onClose]);
 
 	return (
-		<Notification>
-			{(callback) => {
-				openNotificationRef.current = callback;
-				return (
-					<ModalBlock visable={open} onClose={onClose} classes={classes} title='Создайте учетную запись'>
-						<form onSubmit={handleSubmit(onSubmit)}>
-							<FormControl className={classes.loginFormControl} component='fieldset' fullWidth>
-								<FormGroup aria-label='position' row>
-									<Controller
-										name='fullname'
-										as={
-											<TextField
-												autoFocus
-												id='fullname'
-												label='Полное имя'
-												InputLabelProps={{ shrink: true }}
-												variant='filled'
-												type='text'
-												className={classes.registerField}
-												error={!!fieldsErrors.fullname}
-												helperText={fieldsErrors.fullname ? fieldsErrors.fullname.message : null}
-												fullWidth
-											/>
-										}
-										control={control}
-										defaultValue=''
-										rules={{
-											required: true,
-										}}
-									/>
-									<Controller
-										name='username'
-										as={
-											<TextField
-												id='username'
-												label='Имя пользователя'
-												InputLabelProps={{ shrink: true }}
-												variant='filled'
-												type='text'
-												className={classes.registerField}
-												error={!!fieldsErrors.username}
-												helperText={fieldsErrors.username ? fieldsErrors.username.message : null}
-												fullWidth
-											/>
-										}
-										control={control}
-										defaultValue=''
-										rules={{
-											required: true,
-											pattern: {
-												value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-												message: 'Неверное имя пользователя',
-											},
-										}}
-									/>
-									<Controller
-										name='email'
-										as={
-											<TextField
-												id='email'
-												label='E-Mail'
-												InputLabelProps={{ shrink: true }}
-												variant='filled'
-												type='text'
-												className={classes.registerField}
-												error={!!fieldsErrors.email}
-												helperText={fieldsErrors.email ? fieldsErrors.email.message : null}
-												fullWidth
-											/>
-										}
-										control={control}
-										defaultValue=''
-										rules={{
-											required: true,
-											pattern: {
-												value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-												message: 'Неверный E-mail',
-											},
-										}}
-									/>
-									<Controller
-										name='password'
-										as={
-											<TextField
-												id='password'
-												label='Пароль'
-												InputLabelProps={{ shrink: true }}
-												variant='filled'
-												type='password'
-												className={classes.registerField}
-												error={!!fieldsErrors.password}
-												helperText={fieldsErrors.password ? fieldsErrors.password.message : null}
-												fullWidth
-											/>
-										}
-										control={control}
-										defaultValue=''
-										rules={{
-											required: true,
-										}}
-									/>
-									<Controller
-										name='password2'
-										as={
-											<TextField
-												id='password2'
-												label='Подтвердите пароль'
-												InputLabelProps={{ shrink: true }}
-												variant='filled'
-												type='password'
-												className={classes.registerField}
-												error={!!fieldsErrors.password2}
-												helperText={fieldsErrors.password2 ? fieldsErrors.password2.message : null}
-												fullWidth
-											/>
-										}
-										control={control}
-										defaultValue=''
-										rules={{
-											required: true,
-										}}
-									/>
-									<Button
-										disabled={loadingStatus === LoadingStatus.LOADING}
-										type='submit'
-										variant='contained'
-										color='primary'
-										fullWidth>
-										Зарегистрироваться
-									</Button>
-								</FormGroup>
-							</FormControl>
-						</form>
-					</ModalBlock>
-				);
-			}}
-		</Notification>
+		<ModalBlock visable={open} onClose={onClose} classes={classes} title='Создайте учетную запись'>
+			<form onSubmit={handleSubmit(onSubmit)}>
+				<FormControl className={classes.loginFormControl} component='fieldset' fullWidth>
+					<FormGroup aria-label='position' row>
+						<Controller
+							name='fullname'
+							as={
+								<TextField
+									autoFocus
+									id='fullname'
+									label='Полное имя'
+									InputLabelProps={{ shrink: true }}
+									variant='filled'
+									type='text'
+									className={classes.registerField}
+									error={!!fieldsErrors.fullname}
+									helperText={fieldsErrors.fullname ? fieldsErrors.fullname.message : null}
+									fullWidth
+								/>
+							}
+							control={control}
+							defaultValue=''
+							rules={{
+								required: true,
+							}}
+						/>
+						<Controller
+							name='username'
+							as={
+								<TextField
+									id='username'
+									label='Имя пользователя'
+									InputLabelProps={{ shrink: true }}
+									variant='filled'
+									type='text'
+									className={classes.registerField}
+									error={!!fieldsErrors.username}
+									helperText={fieldsErrors.username ? fieldsErrors.username.message : null}
+									fullWidth
+								/>
+							}
+							control={control}
+							defaultValue=''
+							rules={{
+								required: true,
+								pattern: {
+									value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+									message: 'Неверное имя пользователя',
+								},
+							}}
+						/>
+						<Controller
+							name='email'
+							as={
+								<TextField
+									id='email'
+									label='E-Mail'
+									InputLabelProps={{ shrink: true }}
+									variant='filled'
+									type='text'
+									className={classes.registerField}
+									error={!!fieldsErrors.email}
+									helperText={fieldsErrors.email ? fieldsErrors.email.message : null}
+									fullWidth
+								/>
+							}
+							control={control}
+							defaultValue=''
+							rules={{
+								required: true,
+								pattern: {
+									value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+									message: 'Неверный E-mail',
+								},
+							}}
+						/>
+						<Controller
+							name='password'
+							as={
+								<TextField
+									id='password'
+									label='Пароль'
+									InputLabelProps={{ shrink: true }}
+									variant='filled'
+									type='password'
+									className={classes.registerField}
+									error={!!fieldsErrors.password}
+									helperText={fieldsErrors.password ? fieldsErrors.password.message : null}
+									fullWidth
+								/>
+							}
+							control={control}
+							defaultValue=''
+							rules={{
+								required: true,
+							}}
+						/>
+						<Controller
+							name='password2'
+							as={
+								<TextField
+									id='password2'
+									label='Подтвердите пароль'
+									InputLabelProps={{ shrink: true }}
+									variant='filled'
+									type='password'
+									className={classes.registerField}
+									error={!!fieldsErrors.password2}
+									helperText={fieldsErrors.password2 ? fieldsErrors.password2.message : null}
+									fullWidth
+								/>
+							}
+							control={control}
+							defaultValue=''
+							rules={{
+								required: true,
+							}}
+						/>
+						<Button
+							disabled={loadingStatus === LoadingStatus.LOADING}
+							type='submit'
+							variant='contained'
+							color='primary'
+							fullWidth>
+							Зарегистрироваться
+						</Button>
+					</FormGroup>
+				</FormControl>
+			</form>
+		</ModalBlock>
 	);
 };

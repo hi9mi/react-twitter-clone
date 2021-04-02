@@ -1,44 +1,59 @@
 import React from 'react';
 import { Route, Switch, useHistory } from 'react-router-dom';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { Home } from 'pages/Home';
 import { SignIn } from 'pages/Signin';
-import { AuthApi } from 'services/api/authApi';
-import { setUserData } from 'redux/ducks/user/actionCreatores';
-import { selectIsAuth } from 'redux/ducks/user/selector';
+import { fetchUserData } from 'redux/ducks/user/actionCreatores';
+import { selectIsAuth, selectUserStatus } from 'redux/ducks/user/selector';
+import { Layout } from 'pages/Layout';
+import { LoadingStatus } from 'redux/types';
+import { useHomeStyles } from 'pages/Home/theme';
+import { User } from 'pages/User';
 
 function App() {
+	const classes = useHomeStyles();
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const isAuth = useSelector(selectIsAuth);
+	const loadingStatus = useSelector(selectUserStatus);
+	const isReady = loadingStatus !== LoadingStatus.NEVER && loadingStatus !== LoadingStatus.LOADING;
 
-	const checkAuth = React.useCallback(async () => {
-		try {
-			const { data } = await AuthApi.getMe();
-			dispatch(setUserData(data));
-		} catch (error) {
-			console.log(error);
-		}
+	React.useEffect(() => {
+		dispatch(fetchUserData());
 	}, [dispatch]);
 
-	React.useEffect(() => {
-		checkAuth();
-	}, [checkAuth]);
+	// React.useEffect(() => {
+	// 	if (isReady && isAuth ? history.location.pathname === '/signin' || '/' : null) {
+	// 		history.push('/home');
+	// 	} else {
+	// 		history.push('/signin');
+	// 	}
+	// }, [isAuth, isReady, history]);
 
-	React.useEffect(() => {
-		if (isAuth ? history.location.pathname === '/signin' || '/' : null) {
-			history.push('/home');
-		} else {
-			history.push('/signin')
-		}
-	}, [isAuth]);
+	if (!isReady) {
+		return (
+			<div className={classes.LoaderCenter}>
+				<CircularProgress />
+			</div>
+		);
+	}
+
+	if (isReady && isAuth && history.location.pathname === '/signin') {
+		history.push('/home');
+	} else if(!isReady && !isAuth) {
+		history.push('/signin');
+	}
 
 	return (
 		<div className='App'>
 			<Switch>
 				<Route path='/signin' component={SignIn} />
-				<Route path='/' component={Home} />
+				<Layout>
+					<Route path='/home' component={Home} />
+					<Route path='/user' component={User} />
+				</Layout>
 			</Switch>
 		</div>
 	);

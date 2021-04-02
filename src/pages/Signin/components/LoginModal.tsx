@@ -44,85 +44,78 @@ export const LoginModal: React.FC<LoginModalProps> = ({ open, onClose }: LoginMo
 		dispatch(fetchSignUp(data));
 	};
 
-	React.useEffect(() => {
-		if (loadingStatus === LoadingStatus.SUCCESS) {
-			openNotificationRef.current('Авторизация прошла успешна', 'success');
-			onClose();
-		} else if (loadingStatus === LoadingStatus.ERROR) {
-			openNotificationRef.current('Неверный логин или пароль', 'error');
-		}
-	}, [loadingStatus, onClose]);
+	// React.useEffect(() => {
+	// 	if (loadingStatus === LoadingStatus.SUCCESS) {
+	// 		openNotificationRef.current('Авторизация прошла успешна', 'success');
+	// 		onClose();
+	// 	} else if (loadingStatus === LoadingStatus.ERROR) {
+	// 		openNotificationRef.current('Неверный логин или пароль', 'error');
+	// 	}
+	// }, [loadingStatus, onClose]);
 
 	return (
-		<Notification>
-			{(callback) => {
-				openNotificationRef.current = callback;
-				return (
-					<ModalBlock visable={open} onClose={onClose} classes={classes} title='Войти в аккаунт'>
-						<form onSubmit={handleSubmit(onSubmit)}>
-							<FormControl className={classes.loginFormControl} component='fieldset' fullWidth>
-								<FormGroup aria-label='position' row>
-									<Controller
-										name='email'
-										as={
-											<TextField
-												autoFocus
-												id='email'
-												label='E-Mail'
-												InputLabelProps={{ shrink: true }}
-												variant='filled'
-												type='text'
-												className={classes.loginSideField}
-												error={!!fieldsErrors.email}
-												helperText={fieldsErrors.email ? fieldsErrors.email.message : null}
-												fullWidth
-											/>
-										}
-										control={control}
-										defaultValue=''
-										rules={{
-											required: true,
-											pattern: {
-												value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-												message: 'Неверный пароль или E-mail',
-											},
-										}}
-									/>
-									<Controller
-										name='password'
-										as={
-											<TextField
-												id='password'
-												label='Пароль'
-												InputLabelProps={{ shrink: true }}
-												variant='filled'
-												type='password'
-												className={classes.loginSideField}
-												error={!!fieldsErrors.password}
-												helperText={fieldsErrors.password ? fieldsErrors.password.message : null}
-												fullWidth
-											/>
-										}
-										control={control}
-										defaultValue=''
-										rules={{
-											required: true,
-										}}
-									/>
-									<Button
-										disabled={loadingStatus === LoadingStatus.LOADING}
-										type='submit'
-										variant='contained'
-										color='primary'
-										fullWidth>
-										Войти
-									</Button>
-								</FormGroup>
-							</FormControl>
-						</form>
-					</ModalBlock>
-				);
-			}}
-		</Notification>
+		<ModalBlock visable={open} onClose={onClose} classes={classes} title='Войти в аккаунт'>
+			<form onSubmit={handleSubmit(onSubmit)}>
+				<FormControl className={classes.loginFormControl} component='fieldset' fullWidth>
+					<FormGroup aria-label='position' row>
+						<Controller
+							name='email'
+							as={
+								<TextField
+									autoFocus
+									id='email'
+									label='E-Mail'
+									InputLabelProps={{ shrink: true }}
+									variant='filled'
+									type='text'
+									className={classes.loginSideField}
+									error={!!fieldsErrors.email}
+									helperText={fieldsErrors.email ? fieldsErrors.email.message : null}
+									fullWidth
+								/>
+							}
+							control={control}
+							defaultValue=''
+							rules={{
+								required: true,
+								pattern: {
+									value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+									message: 'Неверный пароль или E-mail',
+								},
+							}}
+						/>
+						<Controller
+							name='password'
+							as={
+								<TextField
+									id='password'
+									label='Пароль'
+									InputLabelProps={{ shrink: true }}
+									variant='filled'
+									type='password'
+									className={classes.loginSideField}
+									error={!!fieldsErrors.password}
+									helperText={fieldsErrors.password ? fieldsErrors.password.message : null}
+									fullWidth
+								/>
+							}
+							control={control}
+							defaultValue=''
+							rules={{
+								required: true,
+							}}
+						/>
+						<Button
+							disabled={loadingStatus === LoadingStatus.LOADING}
+							type='submit'
+							variant='contained'
+							color='primary'
+							fullWidth>
+							Войти
+						</Button>
+					</FormGroup>
+				</FormControl>
+			</form>
+		</ModalBlock>
 	);
 };

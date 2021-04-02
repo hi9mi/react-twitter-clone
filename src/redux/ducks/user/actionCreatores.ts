@@ -3,6 +3,7 @@ import { RegisterFormProps } from 'pages/Signin/components/RegisterModal';
 import {
 	FetchSignInActionInterface,
 	FetchSignUpActionInterface,
+	FetchUserDataActionInterface,
 	SetUserDataActionInterface,
 	SetUserLoadingStatusActionInterface,
 	UserActionsType,
@@ -18,6 +19,9 @@ export const fetchSignIn = (payload: RegisterFormProps): FetchSignUpActionInterf
 	type: UserActionsType.FETCH_SIGN_UP,
 	payload,
 });
+export const fetchUserData = (): FetchUserDataActionInterface => ({
+	type: UserActionsType.FETCH_USER_DATA,
+});
 
 export const fetchSignUp = (payload: LoginFormProps): FetchSignInActionInterface => ({
 	type: UserActionsType.FETCH_SIGN_IN,
@@ -29,4 +33,4 @@ export const setUserLoadingStatus = (payload: UserState['status']): SetUserLoadi
 	payload,
 });
 
-export type UserActions = SetUserDataActionInterface | SetUserLoadingStatusActionInterface;
+export type UserActions = SetUserDataActionInterface | SetUserLoadingStatusActionInterface | FetchUserDataActionInterface;

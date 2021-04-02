@@ -67,6 +67,12 @@ export const useHomeStyles = makeStyles((theme: Theme) => ({
 		marginTop: 50,
 		textAlign: 'center',
 	},
+	LoaderCenter: {
+		height: '100vh',
+		display: 'flex',
+		alignItems: 'center',
+		justifyContent: 'center',
+	},
 	tweetsHeader: {
 		display: 'flex',
 		alignItems: 'center',

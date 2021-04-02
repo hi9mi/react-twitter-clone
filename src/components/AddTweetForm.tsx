@@ -51,7 +51,7 @@ export const AddTweetForm: React.FC<AddTweetFormProps> = ({
 	return (
 		<div>
 			<div className={classes.addFormBody}>
-				<Avatar className={classes.TweetAvatar} alt={`Аватарка пользователя ${user?.username}`} src={`${undefined}`} />
+				<Avatar className={classes.TweetAvatar} alt={`Аватарка пользователя ${user?.fullname}`} src={`${undefined}`} />
 				<TextareaAutosize
 					onChange={handleChangeTextarea}
 					className={classes.addFormTextarea}
@@ -107,9 +107,7 @@ export const AddTweetForm: React.FC<AddTweetFormProps> = ({
 				</div>
 			</div>
 			{addFormState === AddFormState.ERROR && (
-				<Alert style={{ cursor: 'pointer' }} severity='error'>
-					Произошла ошибка во время добавления твита 😓
-				</Alert>
+				<Alert severity='error'>Произошла ошибка во время добавления твита 😓</Alert>
 			)}
 		</div>
 	);

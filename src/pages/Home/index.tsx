@@ -11,7 +11,6 @@ import { Tweet } from 'components/Tweet';
 import { selectIsTweetsLoading, selectTweetsStateItems } from 'redux/ducks/tweets/selector';
 import { FullTweet } from './components/FullTweet';
 import { useHomeStyles } from './theme';
-import { Layout } from 'pages/Layout';
 
 export const Home = (): React.ReactElement => {
 	const classes = useHomeStyles();
@@ -19,7 +18,6 @@ export const Home = (): React.ReactElement => {
 	const isLoading = useSelector(selectIsTweetsLoading);
 
 	return (
-		<Layout>
 			<Paper className={classes.tweetsWrapper} variant='outlined'>
 				<Paper className={classes.tweetsHeader} variant='outlined'>
 					<Route path='/home/:any'>
@@ -51,6 +49,5 @@ export const Home = (): React.ReactElement => {
 				</Route>
 				<Route path='/home/tweet/:id' component={FullTweet} exact />
 			</Paper>
-		</Layout>
 	);
 };

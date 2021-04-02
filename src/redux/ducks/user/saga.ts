@@ -8,6 +8,7 @@ import { User } from './contracts/state';
 
 export function* fetchSignInRequest({ payload }: FetchSignInActionInterface): Generator<StrictEffect, void, User> {
 	try {
+		yield put(setUserLoadingStatus(LoadingStatus.LOADING));
 		const { data } = yield call(AuthApi.sighIn, payload);
 		yield put(setUserData(data));
 		window.localStorage.setItem('token', data.token);
@@ -15,6 +16,17 @@ export function* fetchSignInRequest({ payload }: FetchSignInActionInterface): Ge
 		yield put(setUserLoadingStatus(LoadingStatus.ERROR));
 	}
 }
+
+export function* fetchUserDataRequest(): Generator<StrictEffect, void, User> {
+	try {
+		yield put(setUserLoadingStatus(LoadingStatus.LOADING));
+		const { data } = yield call(AuthApi.getMe);
+		yield put(setUserData(data));
+	} catch (e) {
+		yield put(setUserLoadingStatus(LoadingStatus.ERROR));
+	}
+}
+
 export function* fetchSignUpRequest({ payload }: FetchSignUpActionInterface): Generator<StrictEffect, void, User> {
 	try {
 		yield put(setUserLoadingStatus(LoadingStatus.LOADING));
@@ -27,5 +39,6 @@ export function* fetchSignUpRequest({ payload }: FetchSignUpActionInterface): Ge
 
 export function* userSaga() {
 	yield takeEvery(UserActionsType.FETCH_SIGN_IN, fetchSignInRequest);
+	yield takeEvery(UserActionsType.FETCH_USER_DATA, fetchUserDataRequest);
 	yield takeEvery(UserActionsType.FETCH_SIGN_UP, fetchSignUpRequest);
 }
