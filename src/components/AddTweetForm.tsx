@@ -4,21 +4,25 @@ import classNames from 'classnames';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import IconButton from '@material-ui/core/IconButton';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
-import EmojiIcon from '@material-ui/icons/EmojiEmotionsOutlined';
-import ImageOutlinedIcon from '@material-ui/icons/ImageOutlined';
 import Alert from '@material-ui/lab/Alert';
 
 import { useHomeStyles } from 'pages/Home/theme';
-import { fetchAddTweet } from 'redux/ducks/tweets/actionCreatores';
+import { fetchAddTweet, setAddFormState } from 'redux/ducks/tweets/actionCreatores';
 import { AddFormState } from 'redux/ducks/tweets/contracts/state';
 import { selectAddFormState } from 'redux/ducks/tweets/selector';
 import { selectUserData } from 'redux/ducks/user/selector';
+import { AddTweetFormActionButtons } from './AddTweetFormActionButtons';
+import { uploaderImages } from 'utils/uploaderImages';
 
 interface AddTweetFormProps {
 	classes: ReturnType<typeof useHomeStyles>;
 	rowsMax?: number;
+}
+
+export interface ImageObj {
+	blobUrl: string;
+	file: File;
 }
 
 const ONE_HUNDRED_PERCENT = 100;
@@ -31,6 +35,7 @@ export const AddTweetForm: React.FC<AddTweetFormProps> = ({
 }: AddTweetFormProps): React.ReactElement => {
 	const dispatch = useDispatch();
 	const user = useSelector(selectUserData);
+	const [images, setImages] = React.useState<ImageObj[]>([]);
 	const [text, setText] = React.useState<string>('');
 
 	const addFormState = useSelector(selectAddFormState);
@@ -43,9 +48,18 @@ export const AddTweetForm: React.FC<AddTweetFormProps> = ({
 		}
 	};
 
-	const handleClickAddTweet = (): void => {
-		dispatch(fetchAddTweet(text));
+	const handleClickAddTweet = async (): Promise<void> => {
+		let result = [];
+		dispatch(setAddFormState(AddFormState.LOADING));
+		for (let i = 0; i < images.length; i++) {
+			const file = images[i].file;
+			const { url } = await uploaderImages(file);
+			result.push(url);
+		}
+
+		dispatch(fetchAddTweet({ text, images: result }));
 		setText('');
+		setImages([]);
 	};
 
 	return (
@@ -62,12 +76,7 @@ export const AddTweetForm: React.FC<AddTweetFormProps> = ({
 			</div>
 			<div className={classes.addFormBottom}>
 				<div className={classNames(classes.tweetFooter, classes.addFormBottomActions)}>
-					<IconButton color='primary'>
-						<ImageOutlinedIcon style={{ fontSize: 26 }} />
-					</IconButton>
-					<IconButton color='primary'>
-						<EmojiIcon style={{ fontSize: 26 }} />
-					</IconButton>
+					<AddTweetFormActionButtons images={images} onChangeImages={setImages} />
 				</div>
 				<div className={classes.addFormBottomRight}>
 					{text && (

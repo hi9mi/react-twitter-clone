@@ -42,7 +42,9 @@ function App() {
 
 	if (isReady && isAuth && history.location.pathname === '/signin') {
 		history.push('/home');
-	} else if(!isReady && !isAuth) {
+	} else if (isReady && isAuth && history.location.pathname === '/') {
+		history.push('/home');
+	} else if (!isReady && !isAuth) {
 		history.push('/signin');
 	}
 

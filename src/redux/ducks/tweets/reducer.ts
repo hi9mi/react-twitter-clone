@@ -1,4 +1,4 @@
-import produce, { Draft } from 'immer'
+import produce, { Draft } from 'immer';
 
 import { LoadingStatus } from 'redux/types';
 import { TweetsActions } from './actionCreatores';
@@ -39,6 +39,10 @@ export const tweetsReducer = produce((draft: Draft<TweetsState>, action: TweetsA
 			draft.items.unshift(action.payload);
 			// draft.items.splice(0, 0, action.payload);
 			draft.addFormState = AddFormState.NEVER;
+			break;
+
+		case TweetsActionsType.REMOVE_TWEET:
+			draft.items = draft.items.filter(obj => obj._id !== action.payload)
 			break;
 
 		default:

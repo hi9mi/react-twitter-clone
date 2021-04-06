@@ -243,4 +243,42 @@ export const useHomeStyles = makeStyles((theme: Theme) => ({
 		display: 'flex',
 		alignItems: 'center',
 	},
+	imageList: {
+		display: 'flex',
+		alignItems: 'center',
+		flexWrap: 'wrap',
+	},
+	imageListItem: {
+		position: 'relative',
+		marginTop: 5,
+		width: 60,
+		height: 60,
+		borderRadius: 6,
+		marginRight: 5,
+		transition: 'all 0.1s linear',
+		overflow: 'hidden',
+		'& img': {
+			position: 'absolute',
+			left: '50%',
+			top: '50%',
+			transform: 'translate(-50%, -50%)',
+			width: '100%',
+			height: '100%',
+			objectFit: 'cover',
+		},
+		'& svg path': {
+			fill: '#d9d9d9',
+		},
+	},
+	imageListRemoveButton: {
+		top: 0,
+		right: 0,
+		padding: '3px !important',
+		position: 'absolute',
+		background: '#2c2c2cb8 !important',
+		borderRadius: '3px !important',
+		'&:hover svg path': {
+			fill: '#fff',
+		},
+	},
 }));

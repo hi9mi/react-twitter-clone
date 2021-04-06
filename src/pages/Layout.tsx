@@ -26,10 +26,13 @@ export const Layout: React.FC<LayoutProps> = ({ children }): React.ReactElement 
 		dispatch(fetchTags());
 	}, [dispatch]);
 
+
+
 	return (
 		<Container className={classes.wrapper} maxWidth='lg'>
 			<Grid container spacing={3} style={{ height: '100%', paddingBottom: 0 }}>
 				<Grid style={{ paddingBottom: 0 }} sm={1} md={3} item>
+
 					<SideMenu classes={classes} />
 				</Grid>
 				<Grid style={{ paddingBottom: 0 }} sm={8} md={6} item>
