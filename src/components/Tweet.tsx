@@ -18,6 +18,7 @@ import { useHomeStyles } from 'pages/Home/theme';
 import { formatDate } from 'utils/formatDate';
 import { ImagesList } from './ImagesList';
 import { removeTweet } from 'redux/ducks/tweets/actionCreatores';
+import { User } from 'redux/ducks/user/contracts/state';
 
 interface TweetProps {
 	_id: string;
@@ -25,11 +26,7 @@ interface TweetProps {
 	classes: ReturnType<typeof useHomeStyles>;
 	createdAt: string;
 	images?: string[];
-	user: {
-		fullname: string;
-		username: string;
-		avatarUrl: string;
-	};
+	user: User
 }
 
 export const Tweet: React.FC<TweetProps> = ({
@@ -76,7 +73,7 @@ export const Tweet: React.FC<TweetProps> = ({
 	return (
 		<a href={`/home/tweet/${_id}`} className={classes.tweetWrapper} onClick={handleClickTweet}>
 			<Paper className={classNames(classes.tweet, classes.tweetsHeader)} variant='outlined'>
-				<Avatar className={classes.TweetAvatar} alt={`Аватарка пользователя ${user.fullname}`} src={`${undefined}`} />
+				<Avatar className={classes.TweetAvatar} alt={`Аватарка пользователя ${user.fullname}`} />
 				<div style={{ width: '100%' }}>
 					<div className={classes.tweetHeader}>
 						<div>

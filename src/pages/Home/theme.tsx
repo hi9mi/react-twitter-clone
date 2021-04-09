@@ -8,6 +8,7 @@ export const useHomeStyles = makeStyles((theme: Theme) => ({
 	},
 	logo: {
 		margin: '10px 0',
+		padding: 0,
 	},
 	logoIcon: {
 		fontSize: 36,
@@ -19,9 +20,33 @@ export const useHomeStyles = makeStyles((theme: Theme) => ({
 		padding: 0,
 		margin: 0,
 		maxWidth: 230,
+		height: '100vh',
 	},
 	sideMenuListItem: {
 		cursor: 'pointer',
+		'& div': {
+			display: 'inline-flex',
+			alignItems: 'center',
+			position: 'relative',
+			padding: '0 25px 0 20px',
+			height: 50,
+			marginBottom: 15,
+			borderRadius: 30,
+			transition: 'all .1s linear',
+		},
+		'& a': {
+			display: 'inline-flex',
+			alignItems: 'center',
+			position: 'relative',
+			padding: '0 25px 0 20px',
+			height: 50,
+			lineHeight: 50,
+			color: '#14171a',
+			marginBottom: 15,
+			textDecoration: 'none',
+			borderRadius: 30,
+			transition: 'all .1s linear',
+		},
 		'&:hover': {
 			'& div': {
 				backgroundColor: 'rgba(29, 161, 242, 0.1)',
@@ -32,16 +57,15 @@ export const useHomeStyles = makeStyles((theme: Theme) => ({
 					fill: theme.palette.primary.main,
 				},
 			},
-		},
-		'& div': {
-			display: 'inline-flex',
-			alignItems: 'center',
-			position: 'relative',
-			padding: '0 25px 0 20px',
-			height: 50,
-			marginBottom: 15,
-			borderRadius: 30,
-			transition: 'all .1s linear',
+			'& a': {
+				backgroundColor: 'rgba(29, 161, 242, 0.1)',
+				'& h6': {
+					color: theme.palette.primary.main,
+				},
+				'& svg path': {
+					fill: theme.palette.primary.main,
+				},
+			},
 		},
 	},
 	sideMenuListItemLabel: {
@@ -56,6 +80,31 @@ export const useHomeStyles = makeStyles((theme: Theme) => ({
 	sideMenuTweetButton: {
 		marginTop: theme.spacing(2),
 		padding: theme.spacing(3.2),
+	},
+	sideMenuListProfile: {
+		bottom: '2%',
+		position: 'fixed',
+		cursor: 'pointer',
+		maxWidth: 230,
+		width: '100%',
+		borderRadius: 30,
+		padding: 10,
+		transition: 'all .1s linear',
+		'&:hover': {
+			backgroundColor: 'rgba(29, 161, 242, 0.1)',
+		},
+	},
+	sideProfile: {
+		display: 'flex',
+		justifyContent: 'space-between',
+		alignItems: 'center',
+		width: '100%',
+	},
+	sideProfileInfo: {
+		display: 'flex',
+		flexDirection: 'column',
+		flex: 1,
+		marginLeft: 10,
 	},
 	tweetsWrapper: {
 		borderRadius: 0,
@@ -89,6 +138,10 @@ export const useHomeStyles = makeStyles((theme: Theme) => ({
 		display: 'flex',
 		alignItems: 'center',
 		width: '100%',
+		'& a': {
+			textDecoration: 'none',
+			color: '#000',
+		},
 	},
 	tweetsHeaderBackButton: {
 		marginRight: 30,
@@ -279,6 +332,93 @@ export const useHomeStyles = makeStyles((theme: Theme) => ({
 		borderRadius: '3px !important',
 		'&:hover svg path': {
 			fill: '#fff',
+		},
+	},
+	profileHeader: {
+		position: 'sticky',
+		top: 0,
+		zIndex: 2000,
+	},
+	profileBackground: {
+		backgroundColor: 'rgb(196, 207, 214)',
+		height: 200,
+		width: '100%',
+	},
+	profileInfoWrapper: {
+		marginBottom: 16,
+		paddingTop: 12,
+		paddingLeft: 16,
+		paddingRight: 16,
+	},
+	profileInfoHeader: {
+		display: 'flex',
+		justifyContent: 'space-between',
+	},
+	profileAvatarWrapper: {
+		position: 'relative',
+	},
+	profileLargeAvatar: {
+		position: 'absolute',
+		top: '-250%',
+		width: theme.spacing(18),
+		height: theme.spacing(18),
+		border: '3px solid #fff',
+	},
+	profileInfoBlock: {
+		marginTop: 4,
+		marginBottom: 12,
+		'& h6': {
+			fontWeight: 800,
+		},
+	},
+	profileDescription: {
+		marginBottom: 12,
+	},
+	profileBio: {
+		display: 'flex',
+		alignItems: 'center',
+		marginBottom: 12,
+		'& svg': {
+			fontSize: 20,
+			marginRight: 4,
+			'& path': {
+				fontSize: 14,
+				fill: 'rgba(0, 0, 0, 0.54)',
+			},
+		},
+	},
+	profileCounters: {
+		display: 'flex',
+		alignItems: 'center',
+	},
+	profileCountersItem: {
+		display: 'flex',
+		alignItems: 'center',
+		marginRight: 20,
+		'& h6': {
+			fontWeight: 600,
+			marginRight: 4,
+		},
+	},
+	profileRootClass: {
+		transition: 'all linear 0.1s',
+		'& header': {
+			backgroundColor: '#fff',
+			borderBottom: '1px solid #e8e8e8',
+		},
+		'& button': {
+			minWidth: '0',
+		},
+		'& .MuiTab-wrapper': {
+			color: 'rgb(91, 112, 131)',
+			fontWeight: 700,
+			textTransform: 'none',
+			transition: 'all linear 0.1s',
+		},
+		'& .Mui-selected': {
+			'& span': {
+				color: theme.palette.primary.main,
+			},
 		},
 	},
 }));

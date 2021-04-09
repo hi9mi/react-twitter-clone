@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import Hidden from '@material-ui/core/Hidden';
@@ -13,16 +14,21 @@ import UserIcon from '@material-ui/icons/PermIdentity';
 import SearchIcon from '@material-ui/icons/Search';
 import TwitterIcon from '@material-ui/icons/Twitter';
 
-
 import { useHomeStyles } from 'pages/Home/theme';
 import { AddTweetForm } from './AddTweetForm';
 import { ModalBlock } from './ModalBlock';
+import { UserSideProfile } from './UserSideProfile';
+import { selectUserData } from 'redux/ducks/user/selector';
 
 interface SideMenuProps {
 	classes: ReturnType<typeof useHomeStyles>;
 }
 
-export const SideMenu: React.FC<SideMenuProps> = ({ classes }: SideMenuProps): React.ReactElement => {
+export const SideMenu: React.FC<SideMenuProps> = ({ classes }: SideMenuProps) => {
+	const userData = useSelector(selectUserData, () => {
+		return true;
+	});
+
 	const [visableAddTweet, setVisableAddTweet] = React.useState<boolean>(false);
 
 	const handleClickOpenAdddTweet = () => {
@@ -32,6 +38,10 @@ export const SideMenu: React.FC<SideMenuProps> = ({ classes }: SideMenuProps): R
 	const onCloseAddTweet = () => {
 		setVisableAddTweet(false);
 	};
+
+	if (!userData) {
+		return null;
+	}
 
 	return (
 		<ul className={classes.sideMenuList}>
@@ -93,14 +103,14 @@ export const SideMenu: React.FC<SideMenuProps> = ({ classes }: SideMenuProps): R
 				</div>
 			</li>
 			<li className={classes.sideMenuListItem}>
-				<div>
+				<Link to={`/user/${userData!._id}`}>
 					<UserIcon className={classes.sideMenuListItemIcon} />
 					<Hidden smDown>
 						<Typography className={classes.sideMenuListItemLabel} variant='h6'>
 							Профиль
 						</Typography>
 					</Hidden>
-				</div>
+				</Link>
 			</li>
 			<li className={classes.sideMenuListItem}>
 				<Button
@@ -119,6 +129,9 @@ export const SideMenu: React.FC<SideMenuProps> = ({ classes }: SideMenuProps): R
 						<AddTweetForm rowsMax={15} classes={classes} />
 					</div>
 				</ModalBlock>
+			</li>
+			<li className={classes.sideMenuListProfile}>
+				<UserSideProfile classes={classes} />
 			</li>
 		</ul>
 	);

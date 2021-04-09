@@ -5,12 +5,13 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { Home } from 'pages/Home';
 import { SignIn } from 'pages/Signin';
-import { fetchUserData } from 'redux/ducks/user/actionCreatores';
 import { selectIsAuth, selectUserStatus } from 'redux/ducks/user/selector';
 import { Layout } from 'pages/Layout';
 import { LoadingStatus } from 'redux/types';
 import { useHomeStyles } from 'pages/Home/theme';
-import { User } from 'pages/User';
+import { UserPage } from 'pages/User/index';
+import { ActivatePage } from 'pages/ActivatePage';
+import { setUserLoadingStatus } from 'redux/ducks/user/actionCreatores';
 
 function App() {
 	const classes = useHomeStyles();
@@ -21,16 +22,10 @@ function App() {
 	const isReady = loadingStatus !== LoadingStatus.NEVER && loadingStatus !== LoadingStatus.LOADING;
 
 	React.useEffect(() => {
-		dispatch(fetchUserData());
-	}, [dispatch]);
-
-	// React.useEffect(() => {
-	// 	if (isReady && isAuth ? history.location.pathname === '/signin' || '/' : null) {
-	// 		history.push('/home');
-	// 	} else {
-	// 		history.push('/signin');
-	// 	}
-	// }, [isAuth, isReady, history]);
+		if (window.location.pathname.includes('/signin') && loadingStatus === LoadingStatus.NEVER) {
+			dispatch(setUserLoadingStatus(LoadingStatus.LOADED));
+		}
+	}, [dispatch, loadingStatus]);
 
 	if (!isReady) {
 		return (
@@ -44,7 +39,8 @@ function App() {
 		history.push('/home');
 	} else if (isReady && isAuth && history.location.pathname === '/') {
 		history.push('/home');
-	} else if (!isReady && !isAuth) {
+	}
+	if (!isAuth && !window.location.pathname.includes('/user/activate/')) {
 		history.push('/signin');
 	}
 
@@ -54,7 +50,8 @@ function App() {
 				<Route path='/signin' component={SignIn} />
 				<Layout>
 					<Route path='/home' component={Home} />
-					<Route path='/user' component={User} />
+					<Route path='/user/:id' component={UserPage} />
+					<Route path='/user/activate/:hash' component={ActivatePage} />
 				</Layout>
 			</Switch>
 		</div>

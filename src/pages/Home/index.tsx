@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Route } from 'react-router-dom';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Paper from '@material-ui/core/Paper';
@@ -11,18 +11,23 @@ import { Tweet } from 'components/Tweet';
 import { selectIsTweetsLoading, selectTweetsStateItems } from 'redux/ducks/tweets/selector';
 import { FullTweet } from './components/FullTweet';
 import { useHomeStyles } from './theme';
+import { fetchTweets } from 'redux/ducks/tweets/actionCreatores';
+import { fetchTags } from 'redux/ducks/tags/actionCreatores';
 
 export const Home = (): React.ReactElement => {
 	const classes = useHomeStyles();
+	const dispatch = useDispatch();
 	const tweets = useSelector(selectTweetsStateItems);
 	const isLoading = useSelector(selectIsTweetsLoading);
 
-
+	React.useEffect(() => {
+		dispatch(fetchTweets());
+		dispatch(fetchTags());
+	}, [dispatch]);
 
 	return (
 		<Paper className={classes.tweetsWrapper} variant='outlined'>
 			<Paper className={classes.tweetsHeader} variant='outlined'>
-
 				<Route path='/home/:any'>
 					<BackButton classes={classes} />
 				</Route>

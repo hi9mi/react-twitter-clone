@@ -9,30 +9,25 @@ import { SearchTextField } from 'components/SearchTextField';
 import { SideMenu } from 'components/SideMenu';
 import { Tags } from 'components/Tags';
 import { useHomeStyles } from './Home/theme';
-import { fetchTweets } from 'redux/ducks/tweets/actionCreatores';
-import { fetchTags } from 'redux/ducks/tags/actionCreatores';
 import { Users } from 'components/Users';
+import { fetchUserData } from 'redux/ducks/user/actionCreatores';
 
 interface LayoutProps {
 	children: React.ReactNode;
 }
 
 export const Layout: React.FC<LayoutProps> = ({ children }): React.ReactElement => {
-	const classes = useHomeStyles();
 	const dispatch = useDispatch();
+	const classes = useHomeStyles();
 
 	React.useEffect(() => {
-		dispatch(fetchTweets());
-		dispatch(fetchTags());
+		dispatch(fetchUserData());
 	}, [dispatch]);
-
-
 
 	return (
 		<Container className={classes.wrapper} maxWidth='lg'>
 			<Grid container spacing={3} style={{ height: '100%', paddingBottom: 0 }}>
 				<Grid style={{ paddingBottom: 0 }} sm={1} md={3} item>
-
 					<SideMenu classes={classes} />
 				</Grid>
 				<Grid style={{ paddingBottom: 0 }} sm={8} md={6} item>

@@ -1,13 +1,19 @@
 import { axios } from 'core/axios';
 import { LoginFormProps } from 'pages/Signin/components/LoginModal';
 import { RegisterFormProps } from 'pages/Signin/components/RegisterModal';
+import { User } from 'redux/ducks/user/contracts/state';
 
 interface ResponseApi {
 	status: string;
-	data: any;
+	data: User;
 }
 
 export const AuthApi = {
+	async activate(hash: string): Promise<ResponseApi> {
+		const { data } = await axios.get<ResponseApi>('/auth/verify?hash=' + hash);
+		return data;
+	},
+
 	async sighIn(postData: LoginFormProps): Promise<ResponseApi> {
 		const { data } = await axios.post<ResponseApi>('/auth/login', {
 			username: postData.email,
@@ -29,6 +35,11 @@ export const AuthApi = {
 
 	async getMe(): Promise<ResponseApi> {
 		const { data } = await axios.get<ResponseApi>('/users/me');
+		return data;
+	},
+
+	async getUserInfo(userId: string): Promise<ResponseApi> {
+		const { data } = await axios.get<ResponseApi>('/users/' + userId);
 		return data;
 	},
 };

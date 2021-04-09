@@ -1,7 +1,7 @@
-import { call, put, takeEvery } from 'redux-saga/effects';
+// import { call, put, takeEvery } from 'redux-saga/effects';
 
-import { TagsApi } from 'services/api/tagsApi';
-import { LoadingStatus } from 'redux/types';
+// import { TagsApi } from 'services/api/tagsApi';
+// import { LoadingStatus } from 'redux/types';
 
 export function* fetchUsersRequest(): any {
 	// try {

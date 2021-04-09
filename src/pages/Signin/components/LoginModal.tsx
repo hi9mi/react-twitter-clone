@@ -7,11 +7,9 @@ import Button from '@material-ui/core/Button';
 import FormControl from '@material-ui/core/FormControl';
 import FormGroup from '@material-ui/core/FormGroup';
 import TextField from '@material-ui/core/TextField';
-import { Color } from '@material-ui/lab/Alert';
 
 import { ModalBlock } from 'components/ModalBlock';
 import { useStylesSignIn } from '..';
-import { Notification } from 'components/Notification';
 import { fetchSignUp } from 'redux/ducks/user/actionCreatores';
 import { selectUserStatus } from 'redux/ducks/user/selector';
 import { LoadingStatus } from 'redux/types';
@@ -31,10 +29,9 @@ const LoginFormSchema = yup.object().shape({
 	password: yup.string().min(6, 'Неверный пароль').required('Это поле обязательное'),
 });
 
-export const LoginModal: React.FC<LoginModalProps> = ({ open, onClose }: LoginModalProps): React.ReactElement => {
+export const LoginModal: React.FC<LoginModalProps> = ({ open, onClose }) => {
 	const classes = useStylesSignIn();
 	const dispatch = useDispatch();
-	const openNotificationRef = React.useRef<(text: string, type: Color) => void>(() => {});
 	const loadingStatus = useSelector(selectUserStatus);
 
 	const { control, handleSubmit, errors: fieldsErrors } = useForm<LoginFormProps>({
@@ -43,15 +40,6 @@ export const LoginModal: React.FC<LoginModalProps> = ({ open, onClose }: LoginMo
 	const onSubmit = async (data: LoginFormProps) => {
 		dispatch(fetchSignUp(data));
 	};
-
-	// React.useEffect(() => {
-	// 	if (loadingStatus === LoadingStatus.SUCCESS) {
-	// 		openNotificationRef.current('Авторизация прошла успешна', 'success');
-	// 		onClose();
-	// 	} else if (loadingStatus === LoadingStatus.ERROR) {
-	// 		openNotificationRef.current('Неверный логин или пароль', 'error');
-	// 	}
-	// }, [loadingStatus, onClose]);
 
 	return (
 		<ModalBlock visable={open} onClose={onClose} classes={classes} title='Войти в аккаунт'>

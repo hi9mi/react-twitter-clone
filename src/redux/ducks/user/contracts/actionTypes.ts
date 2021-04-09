@@ -7,10 +7,15 @@ import { RegisterFormProps } from 'pages/Signin/components/RegisterModal';
 
 export enum UserActionsType {
 	SET_USER_DATA = 'user/SET_USER_DATA',
+	SIGN_OUT = 'user/SIGN_OUT',
 	FETCH_SIGN_IN = 'user/FETCH_SIGN_IN',
 	FETCH_USER_DATA = 'user/FETCH_USER_DATA',
 	FETCH_SIGN_UP = 'user/FETCH_SIGN_UP',
 	SET_LOADING_STATE = 'user/SET_LOADING_STATE',
+}
+
+export interface SignOutActionInterface extends Action<UserActionsType> {
+	type: UserActionsType.SIGN_OUT;
 }
 
 export interface FetchSignInActionInterface extends Action<UserActionsType> {

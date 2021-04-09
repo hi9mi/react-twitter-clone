@@ -20,6 +20,7 @@ import { fetchTweetData, setTweetData } from 'redux/ducks/tweet/actionCreatores'
 import { selectIsTweetLoading, selectTweetData } from 'redux/ducks/tweet/selector';
 import { useHomeStyles } from '../theme';
 import { ImagesList } from 'components/ImagesList';
+import { Link } from 'react-router-dom';
 
 export const FullTweet: React.FC = (): React.ReactElement | null => {
 	const classes = useHomeStyles();
@@ -59,13 +60,12 @@ export const FullTweet: React.FC = (): React.ReactElement | null => {
 		return (
 			<Paper className={classes.fullTweet}>
 				<div className={classes.tweetsHeaderUser}>
-					<Avatar
-						className={classes.TweetAvatar}
-						alt={`Аватарка пользователя ${tweetData.user.fullname}`}
-						src={tweetData.user.avatarUrl}
-					/>
+					<Avatar className={classes.TweetAvatar} />
 					<Typography>
-						<b>{tweetData.user.fullname}</b>&nbsp;
+						<Link to={`/user/${tweetData.user._id}`}>
+							<b>{tweetData.user.fullname}</b>
+						</Link>
+						&nbsp;
 						<div>
 							<span className={classes.tweetUserName}>@{tweetData.user.username}</span>&nbsp;
 						</div>

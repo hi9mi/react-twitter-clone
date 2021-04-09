@@ -11,7 +11,8 @@ export interface User {
 	location?: string;
 	about?: string;
 	website?: string;
-	data: any
+
+	token?: string;
 }
 
 export interface UserState {

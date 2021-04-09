@@ -71,7 +71,7 @@ export const AddTweetFormActionButtons: React.FC<AddTweetFormActionButtonsProps>
 				</IconButton>
 			</div>
 			<input ref={inputRef} type='file' id='upload-input' hidden />
-			<ImagesList classes={classes} removeImage={removeImage} images={images.map(obj => obj.blobUrl)} />
+			<ImagesList classes={classes} removeImage={removeImage} images={images.map((obj) => obj.blobUrl)} />
 		</div>
 	);
 };

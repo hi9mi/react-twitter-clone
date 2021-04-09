@@ -4,20 +4,22 @@ import { LoadingStatus } from 'redux/types';
 import { AuthApi } from 'services/api/authApi';
 import { setUserData, setUserLoadingStatus } from './actionCreatores';
 import { FetchSignInActionInterface, FetchSignUpActionInterface, UserActionsType } from './contracts/actionTypes';
-import { User } from './contracts/state';
+import { User, UserState } from './contracts/state';
 
-export function* fetchSignInRequest({ payload }: FetchSignInActionInterface): Generator<StrictEffect, void, User> {
+export function* fetchSignInRequest({ payload }: FetchSignInActionInterface): Generator<StrictEffect, void, UserState> {
 	try {
 		yield put(setUserLoadingStatus(LoadingStatus.LOADING));
 		const { data } = yield call(AuthApi.sighIn, payload);
-		yield put(setUserData(data));
-		window.localStorage.setItem('token', data.token);
+		if (data?.token) {
+			window.localStorage.setItem('token', data.token);
+			yield put(setUserData(data));
+		}
 	} catch (e) {
 		yield put(setUserLoadingStatus(LoadingStatus.ERROR));
 	}
 }
 
-export function* fetchUserDataRequest(): Generator<StrictEffect, void, User> {
+export function* fetchUserDataRequest(): Generator<StrictEffect, void, UserState> {
 	try {
 		yield put(setUserLoadingStatus(LoadingStatus.LOADING));
 		const { data } = yield call(AuthApi.getMe);

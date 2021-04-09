@@ -65,7 +65,7 @@ export const AddTweetForm: React.FC<AddTweetFormProps> = ({
 	return (
 		<div>
 			<div className={classes.addFormBody}>
-				<Avatar className={classes.TweetAvatar} alt={`Аватарка пользователя ${user?.fullname}`} src={`${undefined}`} />
+				<Avatar className={classes.TweetAvatar} alt={`Аватарка пользователя ${user?.fullname}`} />
 				<TextareaAutosize
 					onChange={handleChangeTextarea}
 					className={classes.addFormTextarea}
@@ -106,12 +106,9 @@ export const AddTweetForm: React.FC<AddTweetFormProps> = ({
 						onClick={handleClickAddTweet}
 						disabled={text.length > MAX_LENGTH || !text || addFormState === AddFormState.LOADING}
 						color='primary'
-						variant='contained'>
-						{addFormState === AddFormState.LOADING ? (
-							<CircularProgress size={16} color='inherit' style={{ margin: '10px 30px' }} />
-						) : (
-							'Твитнуть'
-						)}
+						variant='contained'
+						style={{ width: '102px', height: '40px' }}>
+						{addFormState === AddFormState.LOADING ? <CircularProgress size={16} color='inherit' /> : 'Твитнуть'}
 					</Button>
 				</div>
 			</div>

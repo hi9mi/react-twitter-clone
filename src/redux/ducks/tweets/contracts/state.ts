@@ -1,4 +1,5 @@
-import { LoadingStatus } from "redux/types";
+import { User } from 'redux/ducks/user/contracts/state';
+import { LoadingStatus } from 'redux/types';
 
 export enum AddFormState {
 	LOADING = 'LOADING',
@@ -11,11 +12,7 @@ export interface Tweet {
 	text: string;
 	images?: [];
 	createdAt: string;
-	user: {
-		fullname: string;
-		username: string;
-		avatarUrl: string;
-	};
+	user: User;
 }
 
 export interface TweetsState {

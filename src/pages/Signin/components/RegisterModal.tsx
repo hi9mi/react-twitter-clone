@@ -7,11 +7,9 @@ import Button from '@material-ui/core/Button';
 import FormControl from '@material-ui/core/FormControl';
 import FormGroup from '@material-ui/core/FormGroup';
 import TextField from '@material-ui/core/TextField';
-import { Color } from '@material-ui/lab/Alert';
 
 import { ModalBlock } from 'components/ModalBlock';
 import { useStylesSignIn } from '..';
-import { Notification } from 'components/Notification';
 import { selectUserStatus } from 'redux/ducks/user/selector';
 import { fetchSignIn } from 'redux/ducks/user/actionCreatores';
 import { LoadingStatus } from 'redux/types';
@@ -50,7 +48,6 @@ export const RegisterModal: React.FC<RegisterModalProps> = ({
 }: RegisterModalProps): React.ReactElement => {
 	const classes = useStylesSignIn();
 	const dispatch = useDispatch();
-	const openNotificationRef = React.useRef<(text: string, type: Color) => void>(() => {});
 	const loadingStatus = useSelector(selectUserStatus);
 
 	const { control, handleSubmit, errors: fieldsErrors } = useForm<RegisterFormProps>({
@@ -59,15 +56,6 @@ export const RegisterModal: React.FC<RegisterModalProps> = ({
 	const onSubmit = async (data: RegisterFormProps) => {
 		dispatch(fetchSignIn(data));
 	};
-
-	React.useEffect(() => {
-		if (loadingStatus === LoadingStatus.SUCCESS) {
-			openNotificationRef.current('Регистрация прошла успешна', 'success');
-			onClose();
-		} else if (loadingStatus === LoadingStatus.ERROR) {
-			openNotificationRef.current('Ошибка во время регистрации. Попытайтесь снова', 'error');
-		}
-	}, [loadingStatus, onClose]);
 
 	return (
 		<ModalBlock visable={open} onClose={onClose} classes={classes} title='Создайте учетную запись'>

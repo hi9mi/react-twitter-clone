@@ -9,13 +9,7 @@ import { UsersState } from './ducks/users/contracts/state';
 import { rootReducer } from './rootReducer';
 import { rootSaga } from './rootSaga';
 
-declare global {
-	interface Window {
-		__REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
-	}
-}
-
-const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
+const composeEnhancers = ((window as any)['__REDUX_DEVTOOLS_EXTENSION_COMPOSE__'] as typeof compose) || compose;
 
 const sagaMiddleware = createSagaMiddleware();
 
