@@ -12,6 +12,7 @@ import { useHomeStyles } from 'pages/Home/theme';
 import { UserPage } from 'pages/User/index';
 import { ActivatePage } from 'pages/ActivatePage';
 import { setUserLoadingStatus } from 'redux/ducks/user/actionCreatores';
+import { fetchUserData } from 'redux/ducks/user/actionCreatores';
 
 function App() {
 	const classes = useHomeStyles();
@@ -22,8 +23,15 @@ function App() {
 	const isReady = loadingStatus !== LoadingStatus.NEVER && loadingStatus !== LoadingStatus.LOADING;
 
 	React.useEffect(() => {
+		dispatch(fetchUserData());
+	}, [dispatch]);
+
+	React.useEffect(() => {
 		if (window.location.pathname.includes('/signin') && loadingStatus === LoadingStatus.NEVER) {
-			dispatch(setUserLoadingStatus(LoadingStatus.LOADED));
+			dispatch(setUserLoadingStatus(LoadingStatus.LOADING));
+		}
+		if (window.location.pathname.includes('/') && loadingStatus === LoadingStatus.NEVER) {
+			dispatch(setUserLoadingStatus(LoadingStatus.LOADING));
 		}
 	}, [dispatch, loadingStatus]);
 
@@ -37,10 +45,11 @@ function App() {
 
 	if (isReady && isAuth && history.location.pathname === '/signin') {
 		history.push('/home');
-	} else if (isReady && isAuth && history.location.pathname === '/') {
+	}
+	if (isReady && isAuth && history.location.pathname === '/') {
 		history.push('/home');
 	}
-	if (!isAuth && !window.location.pathname.includes('/user/activate/')) {
+	if (!isAuth && !window.location.pathname.includes('/verify/')) {
 		history.push('/signin');
 	}
 
@@ -51,7 +60,7 @@ function App() {
 				<Layout>
 					<Route path='/home' component={Home} />
 					<Route path='/user/:id' component={UserPage} />
-					<Route path='/user/activate/:hash' component={ActivatePage} />
+					<Route path='/verify/:hash' component={ActivatePage} />
 				</Layout>
 			</Switch>
 		</div>

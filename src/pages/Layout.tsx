@@ -1,5 +1,4 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import InputAdornment from '@material-ui/core/InputAdornment';
@@ -10,19 +9,13 @@ import { SideMenu } from 'components/SideMenu';
 import { Tags } from 'components/Tags';
 import { useHomeStyles } from './Home/theme';
 import { Users } from 'components/Users';
-import { fetchUserData } from 'redux/ducks/user/actionCreatores';
 
 interface LayoutProps {
 	children: React.ReactNode;
 }
 
 export const Layout: React.FC<LayoutProps> = ({ children }): React.ReactElement => {
-	const dispatch = useDispatch();
 	const classes = useHomeStyles();
-
-	React.useEffect(() => {
-		dispatch(fetchUserData());
-	}, [dispatch]);
 
 	return (
 		<Container className={classes.wrapper} maxWidth='lg'>
